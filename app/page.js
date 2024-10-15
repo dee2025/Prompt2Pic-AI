@@ -17,10 +17,10 @@ export default function Home() {
     try {
       const response = await together.images.create({
         model: "black-forest-labs/FLUX.1-schnell",
-        prompt: imagePrompt || "some children play cricket in a street",
+        prompt: imagePrompt || "image writeen with msg - 'give me some prompt'",
         width: imageSize.width,
         height: imageSize.height,
-        steps: 4,
+        steps: 12,
         n: 1,
         response_format: "b64_json",
       });
@@ -42,9 +42,9 @@ export default function Home() {
 
   return (
     <>
-      <div className="h-screen flex p-2 gap-2 ">
-        <div className="w-1/2 border border-white rounded-md flex flex-col justify-center items-center">
-          <p className="font-bold text-4xl mb-4">Generate AI Images</p>
+      <div className="h-screen flex p-2 flex-wrap  md:flex-row ">
+        <div className="w-full md:w-1/2 border border-white rounded-md flex flex-col justify-center items-center">
+          <p className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-teal-500 text-5xl font-black mb-8">Generate AI Images</p>
           <div className="flex flex-col w-[80%]">
             <textarea
               rows="4"
@@ -72,12 +72,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-1/2 border border-white flex justify-center items-center rounded-md">
+        <div className="w-full md:w-1/2 border border-white flex justify-center items-center rounded-md">
           {imageData ? (
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 px-6">
               <Image
                 src={`data:image/png;base64,${imageData}`}
-                height={imageSize.height / 2} // Dynamically set based on size
+                height={imageSize.height / 2}
                 width={imageSize.width / 2}
                 alt="Generated AI image"
                 className="border border-blue-100 rounded-md"
